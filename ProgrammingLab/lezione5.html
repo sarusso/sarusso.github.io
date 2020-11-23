@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Programming Lab website</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/agency.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+
+    <!-- News -->
+    <section id="news" style="padding:80px !important">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center" style="margin-top:30px">
+            <h2 class="section-heading text-uppercase">Esercizio della lezione 5</h2>
+            
+            <div class="text-left" style="margin-top:50px; margin-bottom:20px;">
+            Modificate l’oggetto CSVFile della lezione precedente in modo che dia un messaggio d’errore se si cerca di aprire un file non esistente.<br/><br/>
+            
+Poi, aggiungete questi due campi al file “shampoo_sales.csv”:<br/><br/>
+<pre style="margin-left:50px">
+01-01-2015,
+01-02-2015,ciao
+</pre>
+
+e gestite gli errori che verranno generati in modo che le linee vengano saltate ma che venga stampato a schermo l’errore.
+            </div>
+            
+          </div>
+        </div>
+        
+        <div class="col-lg-12 text-center" style="margin-top:50px; margin-bottom:20px;">
+            <h3 class="section-heading text-uppercase">Soluzione (una delle tante):</h3>
+        </div>
+        
+        
+        
+<pre id="editor" style="border: #c0c0c0 1px solid">
+
+class CSVFile:
+
+    def __init__(self, name):
+        
+        # Setto il nome del file
+        self.name = name
+
+
+    def get_data(self):
+
+        # Inizializzo una lista vuota per salvare i valori
+        values = []
+
+        # Apro il file
+        try:
+            my_file = open(self.name, 'r')
+        except Exception as e:
+            print('Errore nella lettura del file: "{}"'.format(e))
+            
+            # Esco dalla funzione tornando "niente"
+            return None
+        
+        # Ora inizio a leggere il file linea per linea
+        for line in my_file:
+            
+            # Faccio lo split di ogni linea sulla virgola
+            elements = line.split(',')
+
+            # Se NON sto processando l'intestazione...
+            if elements[0] != 'Date':
+                    
+                # Setto la data ed il valore
+                date  = elements[0]
+                value = elements[1]
+                
+                # La variabile "value" al momento e' ancora una stringa, poiiche' ho letto da file di testo,
+                # quindi converto a valore floating point, e se nel farlo ho un errore avverto. Questo e'
+                # un errore "recoverable", posso proseguire (semplicemente salto la linea).
+                try:
+                    value = float(value)
+                except Exception as e:
+                    
+                    # Stampo l'errore
+                    print('Errore nela conversione a float: "{}"'.format(e))
+                    
+                    # Vado al prossimo "giro" del ciclo, quindi NON eseguo quanto viene dopo (ovvero l'append)
+                    continue
+                
+                # Infine aggiungo alla lista dei valori questo valore
+                values.append(value)
+        
+        # Chiudo il file
+        my_file.close()
+        
+        # Quando ho processato tutte le linee, ritorno i valori
+        return values
+    
+        
+#======================
+# Corpo del programma
+#======================
+
+mio_file = CSVFile(name='shampoo_sales.csv')
+
+print('Nome del file: "{}"'.format(mio_file.name))
+print('Dati contenuti nel file: "{}"'.format(mio_file.get_data()))
+
+</pre>
+      </div>
+ 
+    </section>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/jquery/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../static/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="../static/js/jqBootstrapValidation.js"></script>
+    <script src="../static/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../static/js/agency.min.js"></script>
+    
+    <!-- ACE Editor -->
+    <script src="../static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/chrome");
+      editor.session.setMode("ace/mode/python");
+      editor.setAutoScrollEditorIntoView(true);
+      editor.setOption("maxLines", Infinity);
+      editor.setShowPrintMargin(false);
+    </script>
+
+  </body>
+
+</html>
