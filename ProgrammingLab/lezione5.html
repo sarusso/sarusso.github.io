@@ -58,6 +58,10 @@ e gestite gli errori che verranno generati in modo che le linee vengano saltate 
         
 <pre id="editor" style="border: #c0c0c0 1px solid">
 
+#======================
+# Classe per file CSV
+#======================
+
 class CSVFile:
 
     def __init__(self, name):
@@ -71,13 +75,17 @@ class CSVFile:
         # Inizializzo una lista vuota per salvare i valori
         values = []
 
-        # Apro il file
+        # Provo ad aprire il file per estrarci i dati. Se non ci riesco, prima avverto del'errore, 
+        # poi devo abortire. Questo e' un errore "un-recoverable", ovvero non posso proseguire con
+        # la lettura dei dati se non riesco ad aprire il file!
         try:
             my_file = open(self.name, 'r')
         except Exception as e:
+            
+            # Stampo l'errore
             print('Errore nella lettura del file: "{}"'.format(e))
             
-            # Esco dalla funzione tornando "niente"
+            # Esco dalla funzione tornando "niente".
             return None
         
         # Ora inizio a leggere il file linea per linea
@@ -93,7 +101,7 @@ class CSVFile:
                 date  = elements[0]
                 value = elements[1]
                 
-                # La variabile "value" al momento e' ancora una stringa, poiiche' ho letto da file di testo,
+                # La variabile "value" al momento e' ancora una stringa, poiche' ho letto da file di testo,
                 # quindi converto a valore floating point, e se nel farlo ho un errore avverto. Questo e'
                 # un errore "recoverable", posso proseguire (semplicemente salto la linea).
                 try:
@@ -112,7 +120,7 @@ class CSVFile:
         # Chiudo il file
         my_file.close()
         
-        # Quando ho processato tutte le linee, ritorno i valori
+        # Quando ho processato tutte le righe, ritorno i valori
         return values
     
         
