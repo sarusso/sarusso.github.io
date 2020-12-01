@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Programming Lab website</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/agency.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+
+    <!-- News -->
+    <section id="news" style="padding:80px !important">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center" style="margin-top:30px">
+            <h2 class="section-heading text-uppercase">Esercizio della lezione 6</h2>
+
+            <div class="text-left" style="margin-top:50px; margin-bottom:20px;">
+            Modificate l’oggetto CSVFile della lezione precedente in modo che alzi un'eccezione se il nome del file non è una stringa.<br/><br/>
+           
+            Poi, modificate la funzione get_data in modo da leggere solo un’ intervallo di righe del file, aggiungendo gli argomenti start ed end opzionali, controllandone la correttezza e sanitizzandoli se necessario.
+            </div>
+            
+          </div>
+        </div>
+        
+        <div class="col-lg-12 text-center" style="margin-top:50px; margin-bottom:20px;">
+            <h3 class="section-heading text-uppercase">Soluzione (1):</h3>
+        </div>
+        
+        
+        
+<pre id="editor" style="border: #c0c0c0 1px solid">
+
+#======================
+# Classe per file CSV
+#======================
+
+class CSVFile:
+
+    def __init__(self, name):
+
+        # Se il nome non e' una stringa, genero un errore e torno nel main
+        if not isinstance(name, str):
+            raise Exception('Errore: il parametro "name" deve essere una stringa, non "{}"'.format(type(name)))
+
+        # Setto il nome del file
+        self.name = name
+
+    # I parametri start e end sono None se l'utente non inserisce nulla (default)
+    def get_data(self, start=None, end=None):
+
+        # Inizializzo una lista vuota per salvare i valori
+        values = []
+
+        # Provo ad aprire il file per estrarci i dati. Se non ci riesco, prima avverto del'errore,
+        # poi devo abortire. Questo e' un errore "un-recoverable", ovvero non posso proseguire con
+        # la lettura dei dati se non riesco ad aprire il file!
+        try:
+            my_file = open(self.name, 'r')
+        except Exception as e:
+            
+            # Stampo l'errore
+            print('Errore nella lettura del file: "{}"'.format(e))
+            
+            # Esco dalla funzione tornando "niente".
+            return None
+
+        #======================================
+        # Controlli sui parametri start ed end
+        #======================================
+        if start is not None:
+            if not isinstance(start, int):
+                raise Exception('Errore: il parametro "start" deve essere un intero, non "{}"'.format(type(start)))
+
+        if end is not None:
+            if not isinstance(start, int):
+                raise Exception('Errore: il parametro "end" deve essere un intero, non "{}"'.format(type(end)))
+        
+        if start is not None and end is not None:
+            if  start > end:
+                raise Exception('Errore: start deve essere minore di end, invece ho avuto start="{}", end="{}"'.format(start,end))
+        
+        # Creo un contatore di righe
+        numero_riga = None
+
+        # Se riesco ad aprire il file, lo leggo linea per linea
+        for line in my_file:
+
+            # Faccio lo split di ogni linea sulla virgola
+            elements = line.split(',')
+
+            # Se NON sto processando l'intestazione...
+            if elements[0] != 'Date':
+                
+                # Incremento il contatore. Se non l'ho ancora inzializzato lo setto uguale a zero.
+                if numero_riga is None:
+                    numero_riga = 0
+                else:
+                    numero_riga = numero_riga + 1
+
+                # Se ho lo start, controllo di essere dopo lo start, se non lo sono vado al giro dopo del ciclo
+                if start is not None and numero_riga < start:
+                    continue
+
+                # Se ho l'end, controllo di essere prima dell'end, se non lo sono interrompo il ciclo
+                if end is not None and numero_riga >= end:
+                    break                
+                
+                # Setto la data ed il valore
+                date  = elements[0]
+                value = elements[1]
+                    
+                # La variabile "value" al momento e' ancora una stringa, poiche' ho letto da file di testo.
+                # Provo a convertire a valore floating point, e se nel farlo ho un errore avverto. 
+                # Questo e' un errore "recoverable", posso proseguire (semplicemente salto la linea).
+                try:
+                    value = float(value)
+                except Exception as e:
+                        
+                    # Stampo l'errore
+                    print('Errore nela conversione a float: "{}"'.format(e))
+                        
+                    # Vado al prossimo "giro" del ciclo, quindi NON eseguo quanto viene dopo (ovvero l'append)
+                    continue
+                    
+                # Infine aggiungo alla lista dei valori questo valore
+                values.append(value)
+        
+        # Chiudo il file
+        my_file.close()
+
+        # Quando ho processato tutte le righe ed eventualmente le ho
+        # filtrate in base all'intervallo richiesto, ritorno i valori.
+        return values
+    
+        
+#======================
+# Corpo del programma
+#======================
+
+# Qui uso il mio oggetto (e faccio le varie prove). Testo il mio programma prima
+# con vari nomi di file, poi con con diversi intervalli di righe.
+
+# Qui avro' un errore: nome di file NON stringa
+#mio_file = CSVFile(name=4)
+
+# Qui avro' un errore: file non esistente
+#mio_file = CSVFile(name='pippo.csv') 
+
+# Qui e' tutto ok, file esistente
+mio_file = CSVFile(name='shampoo_sales.csv') 
+print('Nome del file: "{}"'.format(mio_file.name))
+
+# Qui e'tuto ok, chiedo tutte le fighe
+print('Dati contenuti nel file (tutti): "{}"'.format(mio_file.get_data()))
+
+# Qui e'tuto ok, chiedo le rghe 6-12
+print('Dati contenuti nel file: (righe da 6 a 12): "{}"'.format(mio_file.get_data(7,12)))
+
+# Qui e'tuto ok, ed e' un caso limite di una sola riga
+print('Dati contenuti nel file (righe da 12 a 13): "{}"'.format(mio_file.get_data(12,13)))
+
+# Qui e'tuto ok, ed e' un caso limite di nesusna riga
+print('Dati contenuti nel file (righe da 12 a 12): "{}"'.format(mio_file.get_data(12,12)))
+
+# Qui avro' un errore: start non e' un intero
+#print('Dati contenuti nel file: "{}"'.format(mio_file.get_data('cinque',10)))
+
+# Qui avro' un errore: start > end
+#print('Dati contenuti nel file: "{}"'.format(mio_file.get_data(12,7)))
+
+</pre>
+      </div>
+ 
+    </section>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/jquery/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../static/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="../static/js/jqBootstrapValidation.js"></script>
+    <script src="../static/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../static/js/agency.min.js"></script>
+    
+    <!-- ACE Editor -->
+    <script src="../static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/chrome");
+      editor.session.setMode("ace/mode/python");
+      editor.setAutoScrollEditorIntoView(true);
+      editor.setOption("maxLines", Infinity);
+      editor.setShowPrintMargin(false);
+    </script>
+
+  </body>
+
+</html>
