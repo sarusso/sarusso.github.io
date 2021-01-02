@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Programming Lab website</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="../static/css/agency.css" rel="stylesheet">
+
+  </head>
+
+  <body id="page-top">
+
+
+    <!-- News -->
+    <section id="news" style="padding:80px !important">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center" style="margin-top:30px">
+            <h2 class="section-heading text-uppercase">Esercizo della lezione 10</h2>
+            <h4 class="section-heading text-uppercase">(con richiami agli esercizi delle lezione 8 e 9)</h4>
+            
+            <div class="text-left" style="margin-top:50px; margin-bottom:20px;">
+            
+A <b>lezione 8</b> avevamo visto un modello fatto così:
+<br/><br/>
+<i>
+&nbsp; Le vendite dello shampoo al tempo t+1 sono date da<br/>
+&nbsp; &nbsp;  - l’incremento medio negli n mesi precedenti,<br/>
+&nbsp; &nbsp; - applicato sulle vendite al tempo t.<br/>
+</i>
+
+<br/>
+Come esercizio della <b>lezione 9</b>  si doveva implementate un metodo aggiuntivo fit(), che doveva calcolare l’incremento medio su tutto il dataset e salvarlo da qualche parte (es: self.global_avg_increment), per poi modificare il metodo predict() in modo da usare l’incremento medio su tutto il dataset appena calcolato nel fit come descritto a lezione (ovvero mediandolo con l'incremento della finestra del predict).
+ 
+<br/><br/>
+Infine, come esercizio della <b>lezione 10</b> bisognava valutate i due modelli visti nelle lezioni 8 e 9, ovvero quello senza e con
+fit, per ottenere rispettivamente un errore medio di 79* e 82*.
+<br/><br/>
+Per valutare i due modelli dovevate dividere il dataset delle vendite degli shampoo in 24 mesi di training set (che non servirà per il modello senza fit della lezione 8, ma su cui invece va fatto il fit del modelo di lezione 9) e in 12 mesi di test set. Poi, era da applicare entrambi i modelli di lezione 8 e 9 sul test set e calcolare l'errore medio.
+<br/><br/>
+<font size=-1>*sono numeri arrotondati</font>
+ 
+ 
+ 
+            </div>
+            
+          </div>
+        </div>
+        
+        <div class="col-lg-12 text-center" style="margin-top:50px; margin-bottom:20px;">
+            <h3 class="section-heading text-uppercase">Soluzione</h3>
+            <h3 class="section-heading text-uppercase"><font size=-1>(una delle tante, ed ancora preliminare)</font></h3>
+        </div>
+        
+<pre id="editor" style="border: #c0c0c0 1px solid">
+
+# I dati delle mie vendite di shampoo. In questo caso le sto direttamente scrivendo nel codice,
+# ma nella realta' avrei usato l'oggetto CSVFile e caricato i dati dal file. Ma cosi' evito di
+# avere troppe cose su cui sto lavorando assieme, e visto che i dati sono piccoli, posso farlo
+# ed e' comodo (se avevo migliaia di valori forse era meglio di no).
+
+shampoo_sales = [266.0, 145.9, 183.1, 119.3, 180.3, 168.5, 231.8, 224.5, 192.8, 122.9, 336.5, 185.9, 194.3, 149.5, 210.1, 273.3, 191.4, 287.0, 226.0, 303.6, 289.9, 421.6, 264.5, 342.3, 339.7, 440.4, 315.9, 439.3, 401.3, 437.4, 575.5, 407.6, 682.0, 475.3, 581.3, 646.9]
+
+
+# Questa  e' la classe base per i nostri modelli. L'avevamo vista via per il corso.
+# Ho aggiunto il metodo "__repr__" che se ricordate e' la rappresentazione in stringa di
+# un oggetto, e ho fatto in modo che ritorni il nome della classe. Questo  ci tornera' utile
+# dopo, quando confronteremo i modelli
+
+class Model(object):
+
+    def fit(self, data):
+        pass
+    
+    def predict(self):
+        pass
+    
+    def __repr__(self):
+        # Questa e' una cosa che si usa ma un po' avanzata - vuol dire il nome della classe
+        return self.__class__.__name__
+
+
+# Questo e' il modello di lezione 8 - ovvero quello senza il fit. Ci sono un po' di "print" sparsi qua e la' ed
+# ora commentati, che ho usato io stesso per correggere alcuni bug e capire meglio come stafa funzionando il tutto.
+
+class IncrementModel(Model):
+
+    def fit(self, data):
+        raise NotImplementedError('Questo modello non prevede un fit')
+    
+    def predict(self, prev_months):
+        
+        # Faccio alcuni controlli di sanificazione - NON ESAUSTIVI.
+        if not isinstance(prev_months, list):
+            raise Exception('Errore: prev_months non di tipo lista')
+        if len(prev_months) <= 2:
+            raise Exception('Errore: lunghezza di prev_months non sufficiente, servono almeno due elementi per calcolare un incremento')
+        
+        # Setto il numero di mesi
+        n_months = len(prev_months)
+        
+        #print('Il modello sta venendo eseguito su "{}" mesi'.format(n_months))
+
+        # Preparo una variabile di supporto per calcolare l'incremento medio
+        increments = 0
+        
+        # Processo i mesi in input su cui fare la predizione
+        for i in range(n_months):
+
+            # Salto il primo mese in quanto non posso avere definito
+            # un incremento se non ho almento due mesi
+            if i == 0:
+                continue
+            else:
+                # Calcolo l'incremento tra questo mese ed il precedente
+                increments += prev_months[i] - prev_months[i-1]
+                #print('Increment: {}'.format(prev_months[i] - prev_months[i-1]))
+        
+        # Calcolo l'incremento medio divivendo la somam degli incrmenti sul totale dei mesi
+        # ma meno uno: sopra ho scartato il primo mese in effetti!
+        avg_increment = increments / (n_months-1)
+        
+        #print('Il modello sta venendo eseguito su "{}" mesi'.format(n_months))
+     
+        # Torno la predizione
+        return prev_months[-1] + avg_increment
+
+
+
+# Questo e' il modello di lezione 9 - ovvero quello con il fit. Anche qui ci sono un po' di "print" sparsi qua e la' ed
+# ora commentati, che ho usato io stesso per correggere alcuni bug e capire meglio come stafa funzionando il tutto.
+
+class FittableIncrementModel(Model):
+
+    def fit(self, data):
+
+        # Faccio alcuni controlli di sanificazione - NON ESAUSTIVI.
+        if not isinstance(data, list):
+            raise Exception('Errore: data non di tipo lista')
+        if len(data) <= 2:
+            raise Exception('Errore: lunghezza di data non sufficiente, servono almeno due elementi per calcolare un incremento')
+        
+        # Setto il numero di mesi
+        n_months = len(data)
+
+        # Preparo una variabile di supporto per calcolare l'incremento medio
+        fluctuations = 0
+        
+        # Processo i mesi in input su cui fare il fit
+        for i in range(n_months):
+
+            # Salto il primo mese in quanto non posso avere definito
+            # un incremento se non ho almento due mesi
+            if i == 0:
+                continue
+            else:
+                # Calcolo l'incremento tra questo mese ed il precedente
+                fluctuations += (data[i] - data[i-1])
+                #print('Fluctuation: {}'.format(abs(data[i] - data[i-1])))
+        
+        #print('avg fluctuation: "{}"'.format(fluctuations/len(data)))
+        self.avg_fluctuation = fluctuations/len(data)
+    
+    def predict(self, prev_months):
+
+        # Faccio alcuni controlli di sanificazione - NON ESAUSTIVI.
+        if not isinstance(prev_months, list):
+            raise Exception('Errore: prev_months non di tipo lista')
+        if len(prev_months) <= 2:
+            raise Exception('Errore: lunghezza di prev_months non sufficiente, servono almeno due elementi per calcolare un incremento')
+        
+        # Setto il numero di mesi
+        n_months = len(prev_months)
+        
+        #print('Il modello sta venendo eseguito su "{}" mesi'.format(n_months))
+
+        # Preparo una variabile di supporto per calcolare l'incremento medio
+        increments = 0
+        
+        # Processo i mesi in input su cui fare la predizione
+        for i in range(n_months):
+
+            # Salto il primo mese in quanto non posso avere definito
+            # un incremento se non ho almento due mesi
+            if i == 0:
+                continue
+            else:
+                # Calcolo l'incremento tra questo mese ed il precedente
+                increments += prev_months[i] - prev_months[i-1]
+                #print('Increment: {}'.format(prev_months[i] - prev_months[i-1]))
+        
+        # Calcolo l'incremento medio divivendo la somam degli incrmenti sul totale dei mesi
+        # ma meno uno: sopra ho scartato il primo mese in effetti!
+        avg_increment = increments / (n_months-1)
+        
+        #print('Il modello sta venendo eseguito su "{}" mesi'.format(n_months))
+        #print('avg_increment = "{}"'.format(avg_increment))
+        # Torno la predizione
+        return (prev_months[-1] + ( (avg_increment/2) + (self.avg_fluctuation/2)))
+
+
+#=========================================#
+#        Corpo del programma              #
+#=========================================#
+
+# Divido i dati in training e test set
+shampoo_sales_train = shampoo_sales[0:-12]   # Primi 24 mesi
+shampoo_salels_test =  shampoo_sales[-12:] # Ultimi 12 mesi
+
+# Istanzio il modello senza fit
+increment_model = IncrementModel()
+
+# Istanzio il modello con fit e chiamata alla funzione fit
+fitted_increment_model = FittableIncrementModel()
+fitted_increment_model.fit(shampoo_sales[0:24])
+
+# Metto entrambi i modelli in una lista
+models = [increment_model, fitted_increment_model]
+
+# Swicth per il plot
+plot = False
+
+for model in models:
+
+    error = 0
+    print('') # Lascio una riga bianca
+    print('Sto valutando il modello "{}"'.format(model))
+
+    # Predizioni 1 step su test set per modello senza fit
+    predictions = []
+    for i in range(12):
+        prediction = model.predict(shampoo_sales[24+i-3-1:24+i-1])
+        print('"{}" vs "{}"'.format(int(prediction), int(shampoo_sales[24+i])))
+        predictions.append(prediction)
+
+        error += abs(prediction - shampoo_sales[24+i])
+    
+    error = error / 12
+
+    print('Errore medio: "{}"'.format(error))
+
+    # Scommentate le righe qui sotto se volete vedere i plot. Siccome non tutti gli ambienti 
+    # supportano il plot, ho preferito disabilitirle i plot commentandole "di default"
+    #from matplotlib import  pyplot
+    #pyplot.plot(shampoo_sales[0:24] + predictions, color='tab:red')
+    #pyplot.plot(shampoo_sales, color='tab:blue')
+    #pyplot.show()
+
+
+</pre>
+      </div>
+ 
+    </section>
+
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../static/jquery/jquery.min.js"></script>
+    <script src="../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="../static/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Contact form JavaScript -->
+    <script src="../static/js/jqBootstrapValidation.js"></script>
+    <script src="../static/js/contact_me.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../static/js/agency.min.js"></script>
+    
+    <!-- ACE Editor -->
+    <script src="../static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      var editor = ace.edit("editor");
+      editor.setTheme("ace/theme/chrome");
+      editor.session.setMode("ace/mode/python");
+      editor.setAutoScrollEditorIntoView(true);
+      editor.setOption("maxLines", Infinity);
+      editor.setShowPrintMargin(false);
+    </script>
+
+  </body>
+
+</html>
