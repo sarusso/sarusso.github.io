@@ -66,7 +66,7 @@ Per valutare i due modelli dovevate dividere il dataset delle vendite degli sham
         
         <div class="col-lg-12 text-center" style="margin-top:50px; margin-bottom:20px;">
             <h3 class="section-heading text-uppercase">Soluzione</h3>
-            <h3 class="section-heading text-uppercase"><font size=-1>(una delle tante, ed ancora preliminare)</font></h3>
+            <h3 class="section-heading text-uppercase"><font size=-1>(una delle tante)</font></h3>
         </div>
         
 <pre id="editor" style="border: #c0c0c0 1px solid">
@@ -220,39 +220,56 @@ class FittableIncrementModel(Model):
 #        Corpo del programma              #
 #=========================================#
 
-# Divido i dati in training e test set
-shampoo_sales_train = shampoo_sales[0:-12]   # Primi 24 mesi
-shampoo_salels_test =  shampoo_sales[-12:] # Ultimi 12 mesi
+# Setto il punto di divisione tra i dati di training e test set
+train_test_cutoff = 24
+
+# Ricavo la lunghezza del test set che mi sevrira' dopo
+test_set_len = len(shampoo_sales)-train_test_cutoff
+
+# Imposto la finestra usata per il predict (quanti prev_months)
+window = 3
 
 # Istanzio il modello senza fit
 increment_model = IncrementModel()
 
 # Istanzio il modello con fit e chiamata alla funzione fit
-fitted_increment_model = FittableIncrementModel()
-fitted_increment_model.fit(shampoo_sales[0:24])
+fittable_increment_model = FittableIncrementModel()
+fittable_increment_model.fit(shampoo_sales[0:train_test_cutoff])
 
 # Metto entrambi i modelli in una lista
-models = [increment_model, fitted_increment_model]
+models = [increment_model, fittable_increment_model]
 
 # Swicth per il plot
 plot = False
 
 for model in models:
 
-    error = 0
+    error_sum = 0
     print('') # Lascio una riga bianca
     print('Sto valutando il modello "{}"'.format(model))
 
-    # Predizioni 1 step su test set per modello senza fit
+    # Lista di supporto
     predictions = []
-    for i in range(12):
-        prediction = model.predict(shampoo_sales[24+i-3-1:24+i-1])
-        print('"{}" vs "{}"'.format(int(prediction), int(shampoo_sales[24+i])))
-        predictions.append(prediction)
-
-        error += abs(prediction - shampoo_sales[24+i])
     
-    error = error / 12
+    # Cicolo sul test set
+    for i in range(test_set_len):
+        
+        # Calcolo gli indici di inizio e fine della finestra che uso per la predizione per l'indice "i" del test set
+        window_start =  train_test_cutoff+i-window-1
+        window_end = train_test_cutoff+i-1
+        
+        # Chiamo il predict e aggiungo al predizione alle predizioni (che mi serviranno tutte assieme in caso voglia graficarle)
+        prediction = model.predict(shampoo_sales[window_start:window_end])
+        predictions.append(prediction)
+        
+        # Stampo qualche informazione su cosa sta succedendo
+        print('"{}" vs "{}"'.format(int(prediction), int(shampoo_sales[train_test_cutoff+i])))
+
+        # Calcolo l'erorre tra il valore reale e quello della predizione e lo aggiungo alla somma degli errori
+        error_sum += abs(prediction - shampoo_sales[train_test_cutoff+i])
+    
+    # Calclolo la media dell'errore
+    error = error_sum / test_set_len
 
     print('Errore medio: "{}"'.format(error))
 
