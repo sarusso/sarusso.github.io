@@ -15,8 +15,12 @@ a {
   a.active, a:active, a:focus, a:hover {
     color: #3672feeb; }
 
+/* Override Bootstrap's blue text primary wiht a dark garay and defint the lightblue */
 .text-primary {
-  color: #3672febf !important; }
+  color: #656565 !important; }
+
+.text-lightblue {
+  color: #3672febf }
 
 h1,
 h2,
