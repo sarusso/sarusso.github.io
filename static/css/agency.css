@@ -3,6 +3,9 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-agency/blob/master/LICENSE)
  */
+ 
+ /* f2f3f5 */
+ 
 body {
   overflow-x: hidden;
   font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
@@ -32,7 +35,7 @@ h6 {
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
 section {
-  padding: 100px 0; }
+  padding: 50px 0 75px 0; }
   section h2.section-heading {
     font-size: 40px;
     margin-top: 0;
@@ -47,7 +50,7 @@ section {
 
 @media (min-width: 768px) {
   section {
-    padding: 150px 0; } }
+    padding: 75px 0 100px 0; } }
 
 .btn {
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -114,7 +117,7 @@ body {
   -webkit-tap-highlight-color: #3672febf; }
 
 #mainNav {
-  background-color: #f2f3f5; }
+  background-color: #fbfbfb; }
   #mainNav .navbar-toggler {
     font-size: 12px;
     right: 0;
@@ -134,7 +137,7 @@ body {
     font-weight: 400;
     padding: 0.75em 0;
     letter-spacing: 1px;
-    color: white;
+    color: #3672feff;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
     #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
       color: #3672febf; }
@@ -158,7 +161,8 @@ body {
     #mainNav.navbar-shrink {
       padding-top: 0;
       padding-bottom: 0;
-      background-color: #f2f3f5; }
+      background-color: #fbfbfb;
+      border-bottom: 1px solid #e8e8e8; }
       #mainNav.navbar-shrink .navbar-brand {
         font-size: 1.25em;
         padding: 12px 0; } }
@@ -319,7 +323,7 @@ header.masthead {
     -webkit-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
-    background-color: #f2f3f5; }
+    background-color: #fbfbfb; }
     .portfolio-modal .close-modal .lr .rl {
       /* Safari and Chrome */
       z-index: 1052;
@@ -329,7 +333,7 @@ header.masthead {
       -webkit-transform: rotate(90deg);
       -ms-transform: rotate(90deg);
       transform: rotate(90deg);
-      background-color: #f2f3f5; }
+      background-color: #fbfbfb; }
 
 .portfolio-modal .modal-backdrop {
   display: none;
@@ -483,8 +487,11 @@ header.masthead {
   .team-member p {
     margin-top: 0; }
 
+section#lectures {
+  background-color: #fbfbfb; }
+
 section#contact {
-  background-color: #f2f3f5;
+  background-color: #fbfbfb;
   background-image: url("../img/map-image.png");
   background-repeat: no-repeat;
   background-position: center; }
@@ -550,6 +557,6 @@ ul.social-buttons {
     color: white;
     border-radius: 100%;
     outline: none;
-    background-color: #f2f3f5; }
+    background-color: #fbfbfb; }
     ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
       background-color: #3672febf; }
