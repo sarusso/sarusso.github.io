@@ -19,7 +19,8 @@ class TestAndGrade(unittest.TestCase):
 
         moving_average = MovingAverage(4)
         self.assertEqual(moving_average.compute([2,4,8,16,32]), [7.5,15])
-        
+        self.assertEqual(moving_average.compute([2.5,4.5,8.5,16.5,32.5]), [8,15.5])
+      
         global score; score += 18 # Increase score  
 
 
