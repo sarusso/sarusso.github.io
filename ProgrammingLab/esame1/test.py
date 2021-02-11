@@ -332,8 +332,10 @@ class TestAndGrade(unittest.TestCase):
             time_series_file = CSVTimeSeriesFile(file.name)
             
             with self.assertRaises(ExamException):
-                time_series_file.get_data()
-
+                # Va bene alzare l'eccezione sia in get_data che il daily_stats, la specifica era debole
+                time_series = time_series_file.get_data()
+                daily_stats(time_series)
+                
             global score; score += 1 # Increase score
 
 
@@ -353,7 +355,9 @@ class TestAndGrade(unittest.TestCase):
             time_series_file = CSVTimeSeriesFile(file.name)
             
             with self.assertRaises(ExamException):
-                time_series_file.get_data()
+                # Va bene alzare l'eccezione sia in get_data che il daily_stats, la specifica era debole
+                time_series = time_series_file.get_data()
+                daily_stats(time_series)
 
             global score; score += 1 # Increase score
 
