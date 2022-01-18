@@ -46,7 +46,7 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="index.html#projects">Projects</a>
             </li>
-
+            
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="index.html#lectures">Lectures</a>
             </li>
@@ -54,7 +54,7 @@
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="blog.html">Blog</a>
             </li>
-            
+
           </ul>
         </div>
       </div>
@@ -67,22 +67,21 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center" style="padding-top:50px">
-            <h2 class="section-heading text-uppercase" style="margin-top:20px">Blog</h2>
+            <h3 class="section-heading" style="margin-top:20px; margin-bottom:20px">How to make your code reproducible</h3>
+            <h5 style="margin-bottom:30px">7 December 2021</h5>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12" >
-            <div style="margin:0 auto; max-width:800px;">
-            <!-- <p>
-            <br/>Some random stuff...
-            </p>  -->
-            <br/>
-            <ul>
-            <li><a href="blog_container_orchestrators_engines_runtimes.html">Container orchestrators, engines and runtimes: an overview</a></li>
-            <li><a href="blog_tensorflow_container_multiarch.html">A Tensorflow container with Intel and ARM support</a></li>
-
-            </ul>
-
+            <div style="margin:0 auto; max-width:800px">
+            <p>
+            I was kind of surprised about discovering that the official TensorFlow docker image on Docker Hub does not support the ARM architecture, and thus the M1 Apple silicon chips, or at least as of today. So I built one:
+            <a href="https://hub.docker.com/r/sarusso/tensorflow">https://hub.docker.com/r/sarusso/tensorflow</a>.
+            </p>
+            <p>
+            The <code>sarusso/tensorflow:v2.7.0</code> image available at the above link supports both Intel (amd64) and ARM/M1 (arm64) architectures. Only the <code>v2.7.0</code> tag exists, so it is mandatory to set it if using this image.
+            </p>
+  
             </div>
           </div>
         </div>

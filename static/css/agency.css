@@ -8,17 +8,25 @@
  
 body {
   overflow-x: hidden;
+  /* color: font color if required to be changed */
   font-family: 'Roboto Slab', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
 p {
-  line-height: 1.75; }
+  line-height: 1.7; /* 1.75 */
+  margin-bottom: 0.7rem /* 0.5rem */
+  }
+
+li {
+  line-height: 1.75; /* 1.75 */
+  margin-bottom: 0.5rem
+}
 
 a {
   color: #3672febf; }
   a.active, a:active, a:focus, a:hover {
     color: #3672feeb; }
 
-/* Override Bootstrap's blue text primary wiht a dark garay and defint the lightblue */
+/* Override Bootstrap's blue text primary with a dark gray and defint the lightblue */
 .text-primary {
   color: #656565 !important; }
 
