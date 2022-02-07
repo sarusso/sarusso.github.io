@@ -201,11 +201,24 @@
             </p>
 
 
-            <!--  LXD etc. -->
-            <h6 style="margin-top:20px">LXD, RKD, Containerd, CRI-O</h6>
+            <!--  Containerd ctr -->
+            <h6 style="margin-top:20px">Containerd crt</h6>
             <p>
-            These are not exactly engines, and in particular if the definition fo an engine is something capable of directly running container images (from a user prospective), then they are definitely not. However, with a few caveats (as the Containerd CLI runtime, <code>ctr</code>) they can be used as engines too, and I thought it was worth to include them in the schema as engines to underline how potentially nearly everything can be framed as everything. The take home message is: beware definitions in the container ecosystems, they are kind of mutable.
- 
+            Containerd, which will be introduced in the runtimes section, it is not intended to be directly used as an engine (being a runtime), but with the Containerd CLI (<code>ctr</code>) utility it can behave as such. If you are curious, <a href="https://github.com/projectatomic/containerd/blob/master/docs/cli.md">here</a> is a primer for how to use it. I included it in the list for completeness and to show how mutable definitions can be in the container ecosystem, as for CRI-O crictl below.
+            </p>
+
+
+            <!--  CRI-O crictl -->
+            <h6 style="margin-top:20px">CRI-O crictl </h6>
+            <p>
+            CRI-O, which will be introduced in the runtimes section as well, is not intended to be directly used as an engine too. However, with the <code>crictl</code> command line utility it can behave as such, mainly for debugging purpose. To underline that CRI-O is not intended to be directly used from a command line (being a runtime), the official CRI-O code repository states that "any CLIs built as part of this project are only meant for testing this project and there will be no guarantees on the backward compatibility with it". In any case, <a href="https://github.com/cri-o/cri-o/blob/main/tutorials/crictl.md">here</a> is a tutorial for running a Redis service using CRI-O with <code>crictl</code> if you are curious.
+            </p>
+
+
+            <!--  LXD and RKD. -->
+            <h6 style="margin-top:20px">LXD and RKD</h6>
+            <p>
+            LXD is something tangential to a container engine, as it allow to manage both containers and virtual machines, offering "a unified user experience around full Linux systems running inside containers or virtual machines". LXD uses LXC as internal runtime. Rocket (RKD) was instead a command line utility for running containers on Linux directly using kernel-level calls, similarly as for LXC, and is as of today an ended project.
             </p>
 
             <!-------------------> 
@@ -217,13 +230,13 @@
             <!-- Containerd -->
             <h6 style="margin-top:20px">Containerd</h6>
             <p>
-            Containerd is an high-level container originated from Docker, and decoupled for flexibility over the years. A default Docker engine installation will install containerd as well. Containerd is also the default Kubernetes runtime. Containerd uses runC as its default low-level runtime.
+            Containerd is an high-level container originated from Docker, and decoupled for flexibility over the years. A default Docker engine installation will install containerd as well. Containerd is also the default Kubernetes runtime. Containerd uses runC as its default low-level runtime. Contaierd is an industry-standard container runtime with an emphasis on simplicity, robustness and portability.
             </p>
 
             <!-- CRI-O -->
             <h6 style="margin-top:20px">CRI-O</h6>
             <p>
-            CRI-O is an "implementation of the Kubernetes CRI (Container Runtime Interface) to enable using OCI (Open Container Initiative) compatible runtimes" [6]. It basically tried to fill some gaps along the Kubernetes devlopment as is now a direct competitor (if it makes sense to call it as such) to Containerd. CRI-O uses runC as its default low-level runtime as well.
+            CRI-O is an "implementation of the Kubernetes CRI (Container Runtime Interface) to enable using OCI (Open Container Initiative) compatible runtimes" [6]. It basically tried to fill some gaps along the Kubernetes devlopment and is now a direct competitor (if it makes sense to call it as such) to Containerd. CRI-O uses runC as its default low-level runtime as well.
             </p>
 
             <!-------------------> 
