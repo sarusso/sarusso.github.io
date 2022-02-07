@@ -46,4 +46,3 @@ for file_name in os.listdir('.'):
                     content += line
         with open(file_name, 'w') as f:
             f.write(header + content + footer)
-        break

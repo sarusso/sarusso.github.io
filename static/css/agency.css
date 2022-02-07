@@ -544,7 +544,7 @@ footer {
   padding: 25px 0;
   text-align: center; }
   footer span.copyright {
-    font-size: 90%;
+    font-size: 100%;
     line-height: 40px;
     text-transform: none;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
@@ -554,6 +554,13 @@ footer {
     margin-bottom: 0;
     text-transform: none;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+  footer p.licence {
+    font-size: 80%;
+    color: dimgray;
+    line-height: 15px;
+    text-transform: none;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
 
 ul.social-buttons {
   margin-bottom: 0; }
