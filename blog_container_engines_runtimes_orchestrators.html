@@ -101,7 +101,7 @@
             
             The diagram below tries to summarise the situation as of today, and most importantly to clarify the relationships between the various moving parts.<br/><br/>
             
-            <a href="imgs/containers.png"><img src="imgs/containers.png" width="100%"></a>
+            <a href="imgs/containers.png"><img src="imgs/container_ecosystem.png" width="100%"></a>
   
             <p>
             <br/>
@@ -132,13 +132,13 @@
             Runtimes can be further sub-divided in two types: <i><b>high level</b></i>  and <i><b>low leve</b>l</i>.
             
             <ul style="margin-top:10px"> 
-            <li><b>high level</b> container runtimes, or container runtime interfaces (CRI). Following the engine analogy, you can think about them as the valves which in turn feeds the pistons.
-            <li><b>low level</b> container runtimes, or CRI runtimes. You can think about them as the pistons which do the heavy lifting.
+            <li><b>high level</b> container runtimes, or container runtime interfaces (CRI) for Kubernetes. Following the engine analogy, you can think about them as the valves which in turn feeds the pistons.
+            <li><b>low level</b> container runtimes, or CRI runtimes for Kubernetes. You can think about them as the pistons which do the heavy lifting.
             </ul>
             Also note that some engines can behave as runtimes and can be thus used from within other engines, or orchestrators.
 
 
-            <li>Lastly, a <b><i>container orchestrator</i></b> is a software in charge of managing set of containers across different computing resources, handling network and storage configurations which are under the hood delegated to the container runtimes.
+            <li>Lastly, a <b><i>container orchestrator</i></b> is a software in charge of managing set of containers across different computing resources, handling network and storage configurations which are under the hood delegated to the container runtimes (or in some nearly legacy cases, engines).
 
              
             </ul> 
