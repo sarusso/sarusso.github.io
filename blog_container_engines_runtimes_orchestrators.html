@@ -70,7 +70,7 @@
         <div class="row">
           <div class="col-lg-12 text-center" style="padding-top:50px">
             <h3 class="section-heading" style="margin-top:20px; margin-bottom:20px">Container engines, runtimes and orchestrators: an overview</h3>
-            <h5 style="margin-bottom:30px">5 February 2022</h5>
+            <h5 style="margin-bottom:30px">8 February 2022</h5>
           </div>
         </div>
         <div class="row">
@@ -85,21 +85,23 @@
             
 
             <p>
-            As part of the work I am carrying out at INAF (the Italian National Institute for Astrophysics) on new approaches for data-intensive analysis, I am developing a so called <i>science platform</i>.
+            As part of the work I am carrying out at INAF (the Italian National Institute for Astrophysics) and within the EU-funded <a href="https://projectescape.eu/">ESCAPE</a> project, I am developing a so called <i>science platform</i>.
             </p>
             
             <p>
-            The aim of such platforms is to provide simplified access to complex computing and storage resources, as HPC clusters and data-intensive systems, and to make it easy (and reproducible) to run scientific codes on them.
+            Aim of such platforms is to provide simplified access to computing and storage resources, and to make it easy (and reproducible) to run scientific codes on them.
             </p>
             
             <p>
-            The science platform we are developing at INAF (<a href="https://www.ict.inaf.it/gitlab/exact/Rosetta">Rosetta</a>) makes strong use of software containerisation to achieve this goal, and I therefore had the chance to take a deep dive in the container ecosystem.
+            The science platform we are developing at INAF (<a href="https://sarusso.github.io/Rosetta_draft.pdf">Rosetta</a>), which is focused on resource-intensive data analysis, makes strong use of software containerisation to achieve this goal, and I therefore had the chance to take a deep dive in the entire container ecosystem.
             </p>
+
 
             <p>
             The complexity is astonishing. And perhaps as any complex technology simplified enough to get mass adoption, a lot of details are hid when you just run a <code>docker run hello-world</code>.</p>
             
-            The diagram below tries to summarise the situation as of today, and most importantly to clarify the relationships between the various moving parts.<br/><br/>
+            <p>
+            The diagram below tries to summarise the situation as of today, and most importantly to clarify the relationships between the various moving parts.<br/><br/></p>
             
             <a href="imgs/containers.png"><img src="imgs/container_ecosystem.png" width="100%"></a>
   
@@ -110,7 +112,7 @@
             <a href="https://github.com/NERSC/shifter">Shifter</a>, <a href="https://www.nomadproject.io/">Nomad</a> and <a href="https://mesosphere.github.io/marathon/">Marathon</a> are not covered, but there should be enough of them to cover the various peculiarities in order to then generalise.</p>
             
             <p>
-            As it will be tried to explain over this article, in the transition from standalone, monolithic projects as LXC/LCD and Docker to the open container initiative (OCI) standards, the terminology got quite convoluted, and the same component can behave as two different ones, depending on how it is framed (e.g. an engine can became a runtime of another engine).
+            As it will be tried to explain over this article, in the transition from standalone, monolithic projects as LXC and Docker to the open container initiative (OCI) standards, the terminology got quite convoluted, and the same component can behave as two different ones, depending on how it is framed (e.g. an engine can became a runtime of another engine).
             </p>
             
             <p>
@@ -163,7 +165,7 @@
             <p>
             The container engine we all know.
             
-            Being a monolithic project in the beginning, it has since then refactored to support both the need of an open source ecosystem and architectural flexibility. At different stages, the Docker GitHub repository was renamed in Moby and the internal, built-in runtime was extrapolated as Containerd.
+            Being a monolithic project in the beginning, it has since then refactored to support both the need of an open source ecosystem and architectural flexibility. At different stages, the Docker GitHub repository was renamed in Moby and the internal, built-in runtime was extracted as Containerd.
             </p>
             <p>
             
@@ -222,7 +224,7 @@
             </p>
 
             <!-------------------> 
-            <!--  Runtimes (HL) -->
+            <!-- Runtimes (HL) -->
             <!------------------->
             <h5 style="margin-top:40px">High-level runtimes (or CRI)</h5>
             <hr>
@@ -230,17 +232,17 @@
             <!-- Containerd -->
             <h6 style="margin-top:20px">Containerd</h6>
             <p>
-            Containerd is an high-level container originated from Docker, and decoupled for flexibility over the years. A default Docker engine installation will install containerd as well. Containerd is also the default Kubernetes runtime. Containerd uses runC as its default low-level runtime. Contaierd is an industry-standard container runtime with an emphasis on simplicity, robustness and portability.
+            Containerd is an high-level container runtime originated from Docker, and extracted out from Docker itself for flexibility over the years. A default Docker engine installation will install Containerd as well. Containerd is also the default Kubernetes CRI runtime. Containerd uses runC as its default low-level runtime.
             </p>
 
             <!-- CRI-O -->
             <h6 style="margin-top:20px">CRI-O</h6>
             <p>
-            CRI-O is an "implementation of the Kubernetes CRI (Container Runtime Interface) to enable using OCI (Open Container Initiative) compatible runtimes" [6]. It basically tried to fill some gaps along the Kubernetes devlopment and is now a direct competitor (if it makes sense to call it as such) to Containerd. CRI-O uses runC as its default low-level runtime as well.
+            CRI-O is an "implementation of the Kubernetes CRI (Container Runtime Interface) to enable using OCI (Open Container Initiative) compatible runtimes" [6]. It basically tried to fill some gaps along the Kubernetes development and is now a direct competitor (if it makes sense to call it as such) to Containerd. CRI-O uses runC as its default low-level runtime as well.
             </p>
 
             <!-------------------> 
-            <!--  Runtimes (LL) -->
+            <!-- Runtimes (LL) -->
             <!------------------->
             <h5 style="margin-top:40px">Low-level runtimes</h5>
             <hr>
