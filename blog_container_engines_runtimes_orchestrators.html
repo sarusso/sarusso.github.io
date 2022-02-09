@@ -275,28 +275,28 @@
             <!--  Docker Compose -->
             <h6 style="margin-top:20px">Docker compose</h6>
             <p>
-            Docker compose allows to define simple multi-service applications where all the containers run on the same node. It creates a dedicated network for the containers on the host from which they can all talk each others, and a <code>docker-compose.yml</code> file describes how to assemble them. It the simplest orchestrator, and very useful for local and simple deployments. Docker compose has support only for the Docker APIs, and Podman can work with it by emulating Docker. <i>Warning</i>: Docker compose does not talk with a generic runtime but directly with the Docker engine, and is thus not exactly an orchestrator.
+            Docker compose allows to define simple multi-service applications where all the containers run on the same node. It creates a dedicated network for the containers on the host from which they can all talk each others, and a <code>docker-compose.yml</code> file describes how to assemble them. It the simplest orchestrator, and very useful for local and simple deployments. Docker compose has support only for the Docker APIs, and Podman can work with it by emulating Docker.
             </p>       
 
 
             <!--  Docker Swarm -->
             <h6 style="margin-top:20px">Docker Swarm</h6>
             <p>
-            Docker Swarm is similar to docker compose but it can manage multi-node deployments, or on other words a cluster of Docker Engines called a swarm. An in-between solution not much used over the last years IMO. As for Docker compose, it has support only for the Docker APIs. <i>Warning</i>: Docker Swarm does not talk with a generic runtime but directly with the Docker engine, and is thus not exactly an orchestrator.
+            Docker Swarm is similar to Docker compose but it can manage multi-node deployments, or on other words a cluster of Docker engines called a "swarm". As for Docker compose, Docker Swarm supports only the Docker APIs. An in-between solution, but still very useful for small teams where using managed orchestrators is not possible and configuring Kubernetes would require too much effort.
             </p>  
 
 
             <!--  Kubernetes -->
             <h6 style="margin-top:20px">Kubernetes</h6>
             <p>
-            Kubernetes is the full-featured container orchestrators, supporting a variety of settings, network topologies and container runtimes. In 2021 it dropped support for Docker, which generated some panick over the internet. What it actually happend is that it dropped support for Dockershim, and nothing changed for the users. Kubernetes adds the notion of "pod" to the container ecosystem, and can support multiple container runtimes by defining pods with different settings. Mastreing Kubernetes is hard, and even an entry-level setup can take time. Kubernetes can be accessed both using a CLI and a set of REST APIs.
+            Kubernetes is the full-featured solution for container orchestration, supporting a variety of settings, network topologies and container runtimes. In 2021 it dropped support for Docker, which generated some panic over the internet. What it actually happened is that it dropped support for Dockershim in favour of directly using Containerd, and nothing changed for the users. Kubernetes adds the notion of "pod" to the container ecosystem, and can support multiple container runtimes by defining pods with different settings. Mastering Kubernetes is hard, and even an entry-level setup can take time. Kubernetes can be accessed both using a CLI and a set of REST APIs.
             </p>
             
             
             <!--  AWS ECS -->
             <h6 style="margin-top:20px">AWS ECS</h6>
             <p>
-            Amazon Web Services's Elastic Compute Service is Amazon's internal implementation of a Kubernet-like solution. Amazon virtual machines  require the Docker Engine to be installed in order to be managed using ECS [9]. Alternatively, customers can directly use a virtual machine image pre-build by Amazon which is already configured for using it with ECS. The main point is that AWS ECS use the Docker engine, and not a container runtime.
+            Amazon Web Services's Elastic Compute Service is Amazon's internal implementation of a Kubernetes-like solution. Amazon virtual machines  require the Docker Engine to be installed in order to be managed using ECS [9]. Alternatively, customers can directly use a virtual machine image pre-build by Amazon which is already configured for using it with ECS. The main point is that AWS ECS use the Docker engine, and not a container runtime.
             </p>     
             
 
@@ -338,14 +338,21 @@
             </p>
 
 
+
             <!-------------------> 
-            <!--  References      -->
+            <!-- Ack.          -->
+            <!------------------->   
+            <h5 style="margin-top:60px">Acknowledgements</h5>
+            <hr>
+            <p>
+            I would like to thank <a href="https://www.linkedin.com/in/giulianotaffoni/">Giuliano Taffoni</a> for all the discussions we had around software containerisation, and <a href="https://www.linkedin.com/in/john-d-swinbank/">John Swinbank</a> for his feedback. I would also like to thank <a href=" https://www.linkedin.com/in/aleangioi/">Alessandro Angioi</a> for his suggestions around Docker Swarm. Lastly, I would like to thank the ESCAPE project (Horizon 2020 Grant Agreement no. 824064) for funding my work, from which this article stemmed out.  
+            </p>
+
+            <!-------------------> 
+            <!--  References   -->
             <!------------------->   
             <h5 style="margin-top:60px">References</h5>
             <hr>
-            <p>
-            Not to be intend as a scientif paper references, but just a bunch of links which helped me in understanding how all this works:
-            </p>
             <ol>
             <li><a href="https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction">https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction</a>
             
