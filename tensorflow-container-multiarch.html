@@ -4,7 +4,7 @@
   <head>
 
     <!-- Title -->
-    <title>Blog - Stefano Alberto Russo</title>
+    <title>A Tensorflow container with Intel and ARM support - Stefano Alberto Russo</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -69,31 +69,27 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center" style="padding-top:50px">
-            <h2 class="section-heading text-uppercase" style="margin-top:20px">Blog</h2>
+            <h3 class="section-heading" style="margin-top:20px; margin-bottom:20px">A Tensorflow container with Intel and ARM support</h3>
+            <h5 style="margin-bottom:30px">7 December 2021</h5>
           </div>
         </div>
         <div class="row">
           <div class="col-lg-12" >
-            <div style="margin:0 auto; max-width:800px;">
-            <!-- <p>
-            <br/>Some random stuff...
-            </p>  -->
+            <div style="margin:0 auto; max-width:800px">
+            <p>
+            I was kind of surprised about discovering that the official TensorFlow docker image on Docker Hub does not support the ARM architecture, and thus the M1 Apple silicon chips, or at least as of today. So I built one:
+            <a href="https://hub.docker.com/r/sarusso/tensorflow">https://hub.docker.com/r/sarusso/tensorflow</a>.
+            </p>
+            <p>
+            The <code>sarusso/tensorflow:v2.7.0</code> image available at the above link supports both Intel (amd64) and ARM/M1 (arm64) architectures. Only the <code>v2.7.0</code> tag exists, so it is mandatory to set it if using this image.
+            </p>
             <br/>
-            <ul>
-            <li><a href="container-engines-runtimes-orchestrators.html">Container engines, runtimes and orchestrators: an overview</a></li>
-            <li><a href="tensorflow-container-multiarch.html">A Tensorflow container with Intel and ARM support</a></li>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
 
-            </ul>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
             </div>
           </div>
         </div>
