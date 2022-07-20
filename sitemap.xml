@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://sarusso.github.io/</loc>
+  <lastmod>2022-07-19T13:38:21+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/index.html</loc>
+  <lastmod>2022-07-19T13:38:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/blog.html</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/python-courses.html</loc>
+  <lastmod>2022-07-19T13:38:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Software%20containers%20intro%20and%20hands-on.pdf</loc>
+  <lastmod>2022-07-19T13:38:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Best%20practices%20for%20scientific%20software%20development.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Anomaly%20detection%20in%20time%20series.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Container%20engines%20runtimes%20and%20orchestrators.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/blog-container-engines-runtimes-orchestrators.html</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/blog-tensorflow-container-multiarch.html</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Python%20Basic%20Course%20-%20part%20I.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Python%20Basic%20Course%20-%20part%20II.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Python%20Basic%20Course%20-%20part%20III.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Python%20Basic%20Course%20-%20part%20IV.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Python%20Advanced%20Course%20-%20part%20I.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Python%20Advanced%20Course%20-%20part%20II.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Python%20Advanced%20Course%20-%20part%20III.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/files/Python%20Advanced%20Course%20-%20part%20IV.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://sarusso.github.io/Rosetta_draft.pdf</loc>
+  <lastmod>2022-07-19T13:38:20+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
