@@ -153,7 +153,7 @@
             If you are running <b><i>single containers</i></b>, you will interact with a <b>container engine</b>, which will in turn interact with a container runtime, either monolithically built-in or as a module. This leaving out the near-nonsense of engines that can behave as runtimes and that can thus be used from other engines.
             </p>
             <p>
-            If you are instead running <b><i>set of containers</i></b>, you will then use a <b>container orchestrator</b>. Which one to use will depend on the use case and deployment complexity. Moreover, this is true if we leave out a new trend of building orchestrators on top of other orchestrators (e.g. <a href="https://www.portainer.io/">Portainer</a>), in which case the orchestrator will interact with another orchestrator. Lastly, no one prevents you from using an orchestrator to run a set of containers with a single element, thus effectively running a single container, which is something you might want to do in particular in Cloud environments (e.g. in AWS ECS or Fargate).
+            If you are instead running <b><i>set of containers</i></b>, you will then use a <b>container orchestrator</b>. Which one to use will depend on the use case and deployment complexity. Moreover, this is true if we leave out a new trend of building orchestrators on top of other orchestrators (e.g. <a href="https://www.portainer.io/">Portainer</a>), in which case the orchestrator will interact with... another orchestrator. Lastly, no one prevents you from using an orchestrator to run a set of containers with a single element, thus effectively running a single container, which is something you might want to do in particular in Cloud environments (e.g. in AWS ECS or Fargate).
             </p>
 
             <!-------------------> 
@@ -167,7 +167,7 @@
             <p>
             The container engine we all know.
             
-            Being a monolithic project in the beginning, it has since then refactored to support both the need of an open source ecosystem and architectural flexibility. At different stages, the Docker GitHub repository was renamed in Moby and the internal, built-in runtime was extracted as Containerd.
+            Being a monolithic project in the beginning, it has since then been refactored to support both the need of an open source ecosystem and architectural flexibility. At different stages, the Docker GitHub repository was renamed in Moby and the internal, built-in runtime was extracted as Containerd.
             </p>
             <p>
             
@@ -179,7 +179,7 @@
             <!--  Podman -->
             <h6 style="margin-top:20px">Podman</h6>
             <p>
-            Podman is a daemonless container engine for developing, managing, and running OCI Containers on your Linux System. Containers can either be run as root or in rootless mode. Podman is a near drop-in replacement for the Docker which can run container in <u>userspace</u>.
+            Podman is a daemonless container engine for developing, managing, and running OCI Containers on your Linux System. Containers can either be run as root or in rootless mode. Podman is a near drop-in replacement for the Docker engine which can run containers in <u>userspace</u>.
             
             On shared systems, it is probably the best possible tradeoff between usability and security, as it allows to operate both as root and standard user. Unlike other userspace container solutions, in Podman users can become root inside the container even if outside they are standard users, which makes it extremely powerful.
             </p>
