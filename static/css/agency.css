@@ -107,20 +107,6 @@ section {
   font-size: 18px;
   padding: 6px 20px; }
 
-::-moz-selection {
-  background: #3672febf;
-  text-shadow: none; }
-
-::selection {
-  background: #3672febf;
-  text-shadow: none; }
-
-img::selection {
-  background: transparent; }
-
-img::-moz-selection {
-  background: transparent; }
-
 body {
   -webkit-tap-highlight-color: #3672febf; }
 
